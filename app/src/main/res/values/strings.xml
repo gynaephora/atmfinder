@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ATMfinder</string>
+    <string name="title_activity_maps">ATMfinder</string>
+    <string name="test">Поиск</string>
+    <string name="text1">Введите название населенного пункта</string>
+    <string name="text2">Проверьте правильность написания названия населенного пункта</string>
+    <string name="Name">Киев</string>
+    <string name="shedule">График работы:</string>
+    <string name="atm">Банкомат</string>
+    <string name="tso">Терминал</string>
+    <string name="url_maps">com.google.android.apps.maps</string>
+
+    <string name="monday">Пн:</string>
+    <string name="tuesday">Вт:</string>
+    <string name="wednesday">Ср:</string>
+    <string name="thursday">Чт:</string>
+    <string name="friday">Пт:</string>
+    <string name="saturday">Сб:</string>
+    <string name="sunday">Вс:</string>
+    <string name="holiday">Праз:</string>
+
+</resources>
