@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -124,17 +126,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    private class ParseTask extends AsyncTask<String, Void, String> {
+    private class ParseTask extends AsyncTask<String, Void, Atminfo> {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String resultJson = "";
 
         @Override
-        protected String doInBackground(String... params) {
+        protected Atminfo doInBackground(String... params) {
 
             // obtain data from an external resource
             try {
+
+                /*
                 URL url = new URL(URL_0 + params[0] + URL_1 + URLEncoder.encode(params[1], "UTF-8"));
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -151,26 +155,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     buffer.append(line);
                 }
 
-                resultJson = buffer.toString();
+                resultJson = buffer.toString();*/
+              //  final String url = URL_0 + params[0] + URL_1 + URLEncoder.encode(params[1], "UTF-8");
+
+                String url ="https://api.privatbank.ua/p24api/infrastructure?json&atm&address=&city=Днепропетровск";
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                Atminfo atminfo = restTemplate.getForObject(url, Atminfo.class);
+                return atminfo;
+
 
             } catch (Exception e) {
                 e.printStackTrace();
-
+                return null;
             }
-            return resultJson;
+
         }
 
         @Override
-        protected void onPostExecute(String strJson) {
-            super.onPostExecute(strJson);
-            if (mMap != null) {
+        protected void onPostExecute(Atminfo strJson) {
+           super.onPostExecute(strJson);
+          /*  if (mMap != null) {
                 mMap.setInfoWindowAdapter(new MyMarkerOnInfoAdapter(MapsActivity.this));
                 mMap.setOnInfoWindowLongClickListener(new MyMarkerLongClickListener(MapsActivity.this));
-            }
+            }*/
             // derive json-string
-            Log.d(LOG_TAG, strJson);
+            Log.d(LOG_TAG, strJson.getCity());
             JSONObject dataJsonObj;
-
+/*
             try {
                 dataJsonObj = new JSONObject(strJson);
                 JSONArray devices = dataJsonObj.getJSONArray("devices");
@@ -221,7 +233,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 }
