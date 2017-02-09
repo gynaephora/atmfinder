@@ -10,14 +10,14 @@ public class Atminfo {
 
     private String city;
     private String address;
-    private JSONArray devices;
+    private String devices;
 
 
     public String getCity(){
         return city;
     }
 
-    public JSONArray getDevices(){
+    public String getDevices(){
         return devices;
     }
 
@@ -33,7 +33,7 @@ public class Atminfo {
         this.address = address;
     }
 
-    public void setDevices(JSONArray devices) {
+    public void setDevices(String devices) {
         this.devices = devices;
     }
 }

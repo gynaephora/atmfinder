@@ -158,7 +158,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 resultJson = buffer.toString();*/
               //  final String url = URL_0 + params[0] + URL_1 + URLEncoder.encode(params[1], "UTF-8");
 
-                String url ="https://api.privatbank.ua/p24api/infrastructure?json&atm&address=&city=Днепропетровск";
+                String url ="https://api.privatbank.ua/p24api/infrastructure?json&atm&address=&city="+URLEncoder.encode("Днепропетровск", "UTF-8");
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Atminfo atminfo = restTemplate.getForObject(url, Atminfo.class);
@@ -166,10 +166,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
             } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+              //  e.printStackTrace();
+                Log.e("MainActivity", e.getMessage(), e);
 
+            }
+            return null;
         }
 
         @Override
