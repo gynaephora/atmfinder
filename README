@@ -1,1 +1,6 @@
 
+The program allows you to find all the terminals and ATMs of Privatbank in a given city, 
+while clicking on the tag information display terminal as a route on a map of location to the selected ATM.
+Uses:
+- API Privat
+- Google maps services;
